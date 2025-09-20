@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bookify</title>
+  <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <h1 class="logo"><span><img src="https://imgs.search.brave.com/3GQfgsVDLxPvqlHFsyghs3saBAd6CkFp1S0moug84qM/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvaGQvbmZ0/LW1vbmtleS1jNWR6/am9oNG11cGJ5ZjFn/LmpwZw" alt=""></span> NFT Marketplace</h1>
+    <nav class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Authors</a>
+      <div class="dropdown">
+        <a href="#" class="dropbtn">Categories</a>
+        <div class="dropdown-content">
+          <a href="#">Books</a>
+          <a href="#">Comics</a>
+          <a href="#">Art</a>
+        </div>
+      </div>
+      <a href="#">Contact</a>
+      <a href="/login" class="login-btn">Login</a> <!-- Added Login button -->
+      <a href="/register" class="register-btn">Register</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h2>
+      <span id="typed-text"></span>
+      <span id="cursor" style="font-weight:bold;">|</span>
+    </h2>
+    <p>Dive into the world of books with a Spotify-inspired experience.</p>
+    <button class="cta-btn">Explore Now</button>
+  </section>
+
+  <!-- Authors Section -->
+  <section class="section">
+    <h2>Popular Authors</h2>
+    <div class="author-carousel">
+      <div class="author-card">
+        <img src="https://via.placeholder.com/120" alt="Author" />
+        <p>Arundhati Roy</p>
+      </div>
+      <div class="author-card">
+        <img src="https://via.placeholder.com/120" alt="Author" />
+        <p>Chetan Bhagat</p>
+      </div>
+      <div class="author-card">
+        <img src="https://via.placeholder.com/120" alt="Author" />
+        <p>Amish Tripathi</p>
+      </div>
+      <div class="author-card">
+        <img src="https://via.placeholder.com/120" alt="Author" />
+        <p>Ruskin Bond</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Books Section -->
+  <section class="section">
+    <h2>Books by Arundhati Roy</h2>
+    <div class="book-grid">
+      <div class="book-card">
+        <img src="https://via.placeholder.com/300x180" alt="Book Cover" />
+        <h3>The God of Small Things</h3>
+        <p>A powerful novel exploring family, politics, and forbidden love in Kerala.</p>
+      </div>
+      <div class="book-card">
+        <img src="https://via.placeholder.com/300x180" alt="Book Cover" />
+        <h3>The Ministry of Utmost Happiness</h3>
+        <p>A sweeping tale of love, loss, and resistance across India’s landscapes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    © 2025 Bookify. Made with ❤️ by Tanay.
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Typing animation for hero section
+    const text = "Discover Stories, Discover Yourself";
+    const typedText = document.getElementById("typed-text");
+    const cursor = document.getElementById("cursor");
+    let i = 0;
+
+    function type() {
+      if (i < text.length) {
+        typedText.textContent += text.charAt(i);
+        i++;
+        setTimeout(type, 100);
+      } else {
+        setTimeout(() => {
+          cursor.style.display = "none";
+        }, 500);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      type();
+    });
+  </script>
+</body>
+</html>
