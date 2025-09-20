@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Creation Studio - LiteraVerse</title>
+  <link href="style.css" rel="stylesheet" />
+  <style>
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .studio-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .studio-header {
+      text-align: center;
+      color: white;
+      margin-bottom: 40px;
+    }
+
+    .studio-header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #fff, #e2e8f0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .studio-header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .creation-tabs {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .tab-nav {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+      background: #f7fafc;
+      padding: 5px;
+      border-radius: 12px;
+    }
+
+    .tab-button {
+      flex: 1;
+      padding: 15px;
+      background: none;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      color: #718096;
+    }
+
+    .tab-button.active {
+      background: white;
+      color: #667eea;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .creation-form {
+      display: none;
+    }
+
+    .creation-form.active {
+      display: block;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #2d3748;
+      font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .form-group textarea {
+      height: 150px;
+      resize: vertical;
+    }
+
+    .ai-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .ai-option {
+      background: #f7fafc;
+      padding: 20px;
+      border-radius: 12px;
+      border: 2px solid #e2e8f0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .ai-option:hover {
+      border-color: #667eea;
+      transform: translateY(-2px);
+    }
+
+    .ai-option.selected {
+      border-color: #667eea;
+      background: rgba(102, 126, 234, 0.1);
+    }
+
+    .ai-option h4 {
+      margin: 0 0 10px 0;
+      color: #2d3748;
+    }
+
+    .ai-option p {
+      margin: 0;
+      color: #718096;
+      font-size: 0.9rem;
+    }
+
+    .generate-btn {
+      width: 100%;
+      padding: 20px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+    }
+
+    .generate-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+    }
+
+    .generate-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .result-container {
+      margin-top: 30px;
+      padding: 25px;
+      background: #f7fafc;
+      border-radius: 12px;
+      border-left: 4px solid #667eea;
+      display: none;
+    }
+
+    .result-container.show {
+      display: block;
+    }
+
+    .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .result-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #2d3748;
+    }
+
+    .mint-btn {
+      background: linear-gradient(135deg, #27ae60, #2ecc71);
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .mint-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .result-content {
+      color: #4a5568;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
+    .loading {
+      display: none;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .loading.show {
+      display: block;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #e2e8f0;
+      border-top: 4px solid #667eea;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .back-link {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .back-link:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .studio-header h1 {
+        font-size: 2rem;
+      }
+      
+      .tab-nav {
+        flex-direction: column;
+      }
+      
+      .ai-options {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="/" class="back-link">← Back to Home</a>
+  
+  <div class="studio-container">
+    <div class="studio-header">
+      <h1>AI Creation Studio</h1>
+      <p>Generate original stories, comics, and poems with AI-powered creativity</p>
+    </div>
+
+    <div class="creation-tabs">
+      <div class="tab-nav">
+        <button class="tab-button active" onclick="showCreationTab('story')">📚 Story Generator</button>
+        <button class="tab-button" onclick="showCreationTab('poem')">🎭 Poem Generator</button>
+        <button class="tab-button" onclick="showCreationTab('comic')">🎨 Comic Generator</button>
+      </div>
+
+      <!-- Story Generator -->
+      <div id="story" class="creation-form active">
+        <h3>Generate a Story</h3>
+        <div class="form-group">
+          <label for="story-genre">Genre</label>
+          <select id="story-genre">
+            <option value="fantasy">Fantasy</option>
+            <option value="sci-fi">Science Fiction</option>
+            <option value="mystery">Mystery</option>
+            <option value="romance">Romance</option>
+            <option value="horror">Horror</option>
+            <option value="literary">Literary Fiction</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="story-theme">Theme or Prompt</label>
+          <input type="text" id="story-theme" placeholder="e.g., A detective solving crimes in a cyberpunk city">
+        </div>
+        <div class="form-group">
+          <label for="story-length">Length</label>
+          <select id="story-length">
+            <option value="short">Short Story (500-1000 words)</option>
+            <option value="medium">Medium Story (1000-3000 words)</option>
+            <option value="long">Long Story (3000+ words)</option>
+          </select>
+        </div>
+        <div class="ai-options">
+          <div class="ai-option" onclick="selectAIOption(this, 'creative')">
+            <h4>Creative Mode</h4>
+            <p>Imaginative and experimental</p>
+          </div>
+          <div class="ai-option selected" onclick="selectAIOption(this, 'balanced')">
+            <h4>Balanced Mode</h4>
+            <p>Well-structured and engaging</p>
+          </div>
+          <div class="ai-option" onclick="selectAIOption(this, 'classic')">
+            <h4>Classic Mode</h4>
+            <p>Traditional storytelling</p>
+          </div>
+        </div>
+        <button class="generate-btn" onclick="generateContent('story')">Generate Story</button>
+      </div>
+
+      <!-- Poem Generator -->
+      <div id="poem" class="creation-form">
+        <h3>Generate a Poem</h3>
+        <div class="form-group">
+          <label for="poem-style">Poetry Style</label>
+          <select id="poem-style">
+            <option value="free-verse">Free Verse</option>
+            <option value="sonnet">Sonnet</option>
+            <option value="haiku">Haiku</option>
+            <option value="limerick">Limerick</option>
+            <option value="ballad">Ballad</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="poem-topic">Topic or Emotion</label>
+          <input type="text" id="poem-topic" placeholder="e.g., Love, Nature, Technology, Dreams">
+        </div>
+        <div class="form-group">
+          <label for="poem-mood">Mood</label>
+          <select id="poem-mood">
+            <option value="melancholic">Melancholic</option>
+            <option value="joyful">Joyful</option>
+            <option value="mysterious">Mysterious</option>
+            <option value="romantic">Romantic</option>
+            <option value="contemplative">Contemplative</option>
+          </select>
+        </div>
+        <button class="generate-btn" onclick="generateContent('poem')">Generate Poem</button>
+      </div>
+
+      <!-- Comic Generator -->
+      <div id="comic" class="creation-form">
+        <h3>Generate a Comic Script</h3>
+        <div class="form-group">
+          <label for="comic-genre">Genre</label>
+          <select id="comic-genre">
+            <option value="superhero">Superhero</option>
+            <option value="fantasy">Fantasy</option>
+            <option value="sci-fi">Science Fiction</option>
+            <option value="slice-of-life">Slice of Life</option>
+            <option value="horror">Horror</option>
+            <option value="comedy">Comedy</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="comic-premise">Premise</label>
+          <input type="text" id="comic-premise" placeholder="e.g., A superhero who can only fly backwards">
+        </div>
+        <div class="form-group">
+          <label for="comic-pages">Number of Pages</label>
+          <select id="comic-pages">
+            <option value="1">1 Page</option>
+            <option value="3">3 Pages</option>
+            <option value="5">5 Pages</option>
+            <option value="8">8 Pages</option>
+          </select>
+        </div>
+        <button class="generate-btn" onclick="generateContent('comic')">Generate Comic Script</button>
+      </div>
+
+      <!-- Loading State -->
+      <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>AI is crafting your creative work...</p>
+      </div>
+
+      <!-- Result Container -->
+      <div class="result-container" id="result">
+        <div class="result-header">
+          <div class="result-title" id="result-title">Generated Content</div>
+          <button class="mint-btn" onclick="mintAsNFT()">Mint as NFT</button>
+        </div>
+        <div class="result-content" id="result-content"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="wallet.js"></script>
+  <script src="blockchain.js"></script>
+  <script src="ai-manager.js"></script>
+  <script>
+    let currentTab = 'story';
+    let selectedAIMode = 'balanced';
+
+    function showCreationTab(tabName) {
+      // Hide all forms
+      document.querySelectorAll('.creation-form').forEach(form => {
+        form.classList.remove('active');
+      });
+
+      // Remove active class from all buttons
+      document.querySelectorAll('.tab-button').forEach(button => {
+        button.classList.remove('active');
+      });
+
+      // Show selected form
+      document.getElementById(tabName).classList.add('active');
+      event.target.classList.add('active');
+      currentTab = tabName;
+    }
+
+    function selectAIOption(element, mode) {
+      document.querySelectorAll('.ai-option').forEach(option => {
+        option.classList.remove('selected');
+      });
+      element.classList.add('selected');
+      selectedAIMode = mode;
+    }
+
+    async function generateContent(type) {
+      const loading = document.getElementById('loading');
+      const result = document.getElementById('result');
+      const generateBtn = event.target;
+
+      // Show loading
+      loading.classList.add('show');
+      result.classList.remove('show');
+      generateBtn.disabled = true;
+      generateBtn.textContent = 'Generating...';
+
+      try {
+        let generatedContent = null;
+
+        if (type === 'story') {
+          const genre = document.getElementById('story-genre').value;
+          const theme = document.getElementById('story-theme').value;
+          const length = document.getElementById('story-length').value;
+          
+          generatedContent = await aiManager.generateStory(theme, genre, length);
+        } else if (type === 'poem') {
+          const style = document.getElementById('poem-style').value;
+          const topic = document.getElementById('poem-topic').value;
+          const mood = document.getElementById('poem-mood').value;
+          
+          generatedContent = await aiManager.generatePoem(topic, style, mood);
+        } else if (type === 'comic') {
+          const genre = document.getElementById('comic-genre').value;
+          const premise = document.getElementById('comic-premise').value;
+          const pages = document.getElementById('comic-pages').value;
+          
+          generatedContent = await aiManager.generateComicScript(premise, genre, parseInt(pages));
+        }
+
+        // Validate content
+        const validation = aiManager.validateContent(generatedContent.content);
+        if (!validation.isValid) {
+          console.warn('Content validation issues:', validation.issues);
+        }
+
+        // Show result
+        loading.classList.remove('show');
+        result.classList.add('show');
+        generateBtn.disabled = false;
+        generateBtn.textContent = 'Generate ' + (type === 'story' ? 'Story' : type === 'poem' ? 'Poem' : 'Comic Script');
+
+        document.getElementById('result-title').textContent = generatedContent.title;
+        document.getElementById('result-content').textContent = generatedContent.content;
+
+        // Store generated content for minting
+        window.currentGeneratedContent = generatedContent;
+
+      } catch (error) {
+        console.error('Content generation failed:', error);
+        
+        loading.classList.remove('show');
+        generateBtn.disabled = false;
+        generateBtn.textContent = 'Generate ' + (type === 'story' ? 'Story' : type === 'poem' ? 'Poem' : 'Comic Script');
+        
+        alert('Content generation failed. Please try again.');
+      }
+    }
+
+    async function mintAsNFT() {
+      if (!walletManager.isConnected) {
+        alert('Please connect your wallet first');
+        return;
+      }
+
+      const content = document.getElementById('result-content').textContent;
+      const title = document.getElementById('result-title').textContent;
+      
+      if (!content || !window.currentGeneratedContent) {
+        alert('No content to mint');
+        return;
+      }
+
+      const mintBtn = event.target;
+      mintBtn.textContent = 'Minting...';
+      mintBtn.disabled = true;
+
+      try {
+        // Determine literary type
+        let literaryType = 0; // Story
+        if (window.currentGeneratedContent.style) {
+          literaryType = 2; // Poem
+        } else if (window.currentGeneratedContent.pages) {
+          literaryType = 1; // Comic
+        }
+
+        // Prepare NFT data
+        const nftData = {
+          title: title,
+          author: walletManager.account, // Use wallet address as author
+          literaryType: literaryType,
+          genre: window.currentGeneratedContent.genre || 'General',
+          description: content.substring(0, 200) + '...',
+          contentHash: btoa(content), // Simple hash for demo
+          isAIGenerated: true,
+          royaltyPercentage: 500 // 5%
+        };
+
+        // Mint NFT using blockchain manager
+        const tokenId = await blockchainManager.mintNFT(nftData);
+        
+        alert(`NFT minted successfully!\n\nToken ID: ${tokenId}\nTitle: ${title}\n\nYour AI-generated content is now on the blockchain!`);
+        
+        // Reset form
+        mintBtn.textContent = 'Mint as NFT';
+        mintBtn.disabled = false;
+        
+        // Clear generated content
+        window.currentGeneratedContent = null;
+        document.getElementById('result').classList.remove('show');
+
+      } catch (error) {
+        console.error('NFT minting failed:', error);
+        alert('NFT minting failed: ' + error.message);
+        
+        mintBtn.textContent = 'Mint as NFT';
+        mintBtn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>

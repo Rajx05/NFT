@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NFT Marketplace</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif; }
+    body { background:#121212; color:#fff; line-height:1.6; }
+    header { background:#1f1f1f; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #2e2e2e; }
+    header h1 { font-size:1.5rem; color:#00f5d4; }
+    nav ul { list-style:none; display:flex; gap:1.5rem; }
+    nav a { color:#fff; text-decoration:none; font-weight:500; transition: color 0.3s; }
+    nav a:hover { color:#00f5d4; }
+    .hero { text-align:center; padding:3rem 1rem; }
+    .hero h2 { font-size:2.5rem; margin-bottom:1rem; }
+    .search-box { margin-top:1rem; }
+    .search-box input { padding:0.7rem 1rem; width:300px; border-radius:25px; border:none; outline:none; }
+    .nft-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:1.5rem; padding:2rem; }
+    .nft-card { background:#1f1f1f; border-radius:15px; overflow:hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .nft-card:hover { transform: translateY(-5px); box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6); }
+    .nft-card img { width:100%; height:200px; object-fit:cover; }
+    .nft-card .info { padding:1rem; }
+    .nft-card .info h3 { margin-bottom:0.5rem; font-size:1.2rem; color:#00f5d4; }
+    .nft-card .info p { font-size:0.9rem; color:#bbb; }
+    footer { text-align:center; padding:1rem; background:#1f1f1f; border-top:2px solid #2e2e2e; color:#aaa; font-size:0.9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>My NFT Marketplace</h1>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Explore</a></li>
+        <li><a href="#">Create</a></li>
+        <li><a href="#">Wallet</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Discover, Collect, and Sell NFTs</h2>
+    <p>Join the world’s leading marketplace for digital art and collectibles</p>
+    <div class="search-box">
+      <input type="text" id="walletInput" placeholder="Enter wallet address (0x...)" />
+      <button id="loadBtn">Load NFTs</button>
+    </div>
+  </section>
+
+  <section class="nft-grid" id="nftGrid"></section>
+
+  <footer>
+    <p>&copy; 2025 My NFT Marketplace. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Link the JS -->
+  <script src="master.js"></script>
+</body>
+</html>
