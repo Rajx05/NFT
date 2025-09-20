@@ -3,28 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bookify</title>
+  <title>LiteraVerse - Web3 Marketplace for Stories, Comics & Poems</title>
   <link href="style.css" rel="stylesheet" />
 </head>
 <body>
 
   <!-- Navbar -->
   <header class="navbar">
-    <h1 class="logo"><span><img src="https://imgs.search.brave.com/3GQfgsVDLxPvqlHFsyghs3saBAd6CkFp1S0moug84qM/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvaGQvbmZ0/LW1vbmtleS1jNWR6/am9oNG11cGJ5ZjFn/LmpwZw" alt=""></span> NFT Marketplace</h1>
+    <h1 class="logo">
+      <span><img src="https://imgs.search.brave.com/3GQfgsVDLxPvqlHFsyghs3saBAd6CkFp1S0moug84qM/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvaGQvbmZ0/LW1vbmtleS1jNWR6/am9oNG11cGJ5ZjFn/LmpwZw" alt=""></span> 
+      LiteraVerse
+    </h1>
     <nav class="nav-links">
-      <a href="#">Home</a>
-      <a href="#">Authors</a>
+      <a href="#marketplace">Marketplace</a>
+      <a href="/ai-studio">Create</a>
       <div class="dropdown">
         <a href="#" class="dropbtn">Categories</a>
         <div class="dropdown-content">
-          <a href="#">Books</a>
-          <a href="#">Comics</a>
-          <a href="#">Art</a>
+          <a href="#stories">Stories</a>
+          <a href="#comics">Comics</a>
+          <a href="#poems">Poems</a>
         </div>
       </div>
-      <a href="#">Contact</a>
-      <a href="/login" class="login-btn">Login</a> <!-- Added Login button -->
-      <a href="/register" class="register-btn">Register</a>
+      <a href="#community">Community</a>
+      <a href="/login" class="login-btn">Login</a>
+      <a href="/register" class="register-btn">Connect Wallet</a>
     </nav>
   </header>
 
@@ -34,77 +37,272 @@
       <span id="typed-text"></span>
       <span id="cursor" style="font-weight:bold;">|</span>
     </h2>
-    <p>Dive into the world of books with a Spotify-inspired experience.</p>
-    <button class="cta-btn">Explore Now</button>
-  </section>
-
-  <!-- Authors Section -->
-  <section class="section">
-    <h2>Popular Authors</h2>
-    <div class="author-carousel">
-      <div class="author-card">
-        <img src="https://via.placeholder.com/120" alt="Author" />
-        <p>Arundhati Roy</p>
+    <p>Write, Own, and Earn: The Web3 Marketplace for Stories, Comics, and Poems</p>
+    <div class="hero-buttons">
+      <a href="/ai-studio" class="cta-btn primary">Start Creating</a>
+      <a href="#marketplace" class="cta-btn secondary">Explore Marketplace</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-number" id="total-nfts">0</span>
+        <span class="stat-label">NFTs Minted</span>
       </div>
-      <div class="author-card">
-        <img src="https://via.placeholder.com/120" alt="Author" />
-        <p>Chetan Bhagat</p>
+      <div class="stat">
+        <span class="stat-number" id="total-creators">0</span>
+        <span class="stat-label">Active Creators</span>
       </div>
-      <div class="author-card">
-        <img src="https://via.placeholder.com/120" alt="Author" />
-        <p>Amish Tripathi</p>
-      </div>
-      <div class="author-card">
-        <img src="https://via.placeholder.com/120" alt="Author" />
-        <p>Ruskin Bond</p>
+      <div class="stat">
+        <span class="stat-number" id="total-sales">0</span>
+        <span class="stat-label">Total Sales</span>
       </div>
     </div>
   </section>
 
-  <!-- Books Section -->
-  <section class="section">
-    <h2>Books by Arundhati Roy</h2>
-    <div class="book-grid">
-      <div class="book-card">
-        <img src="https://via.placeholder.com/300x180" alt="Book Cover" />
-        <h3>The God of Small Things</h3>
-        <p>A powerful novel exploring family, politics, and forbidden love in Kerala.</p>
+  <!-- Features Section -->
+  <section class="features-section">
+    <h2>Why Choose LiteraVerse?</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔗</div>
+        <h3>Blockchain Ownership</h3>
+        <p>Mint your stories, comics, and poems as NFTs with indisputable ownership and provenance.</p>
       </div>
-      <div class="book-card">
-        <img src="https://via.placeholder.com/300x180" alt="Book Cover" />
-        <h3>The Ministry of Utmost Happiness</h3>
-        <p>A sweeping tale of love, loss, and resistance across India’s landscapes.</p>
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>AI-Powered Creation</h3>
+        <p>Generate original content using integrated AI models with automatic attribution and ownership.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <h3>Fair Royalties</h3>
+        <p>Automated royalty distribution ensures creators earn from every sale and trade.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h3>Secure & Private</h3>
+        <p>End-to-end encryption and smart contracts protect your creative IP and data.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Creators Section -->
+  <section class="section">
+    <h2>Featured Creators</h2>
+    <div class="creator-carousel">
+      <div class="creator-card">
+        <img src="https://via.placeholder.com/120" alt="Creator" />
+        <h4>Sarah Chen</h4>
+        <p>Fantasy Novelist</p>
+        <div class="creator-stats">
+          <span>15 NFTs</span>
+          <span>2.5 ETH</span>
+        </div>
+      </div>
+      <div class="creator-card">
+        <img src="https://via.placeholder.com/120" alt="Creator" />
+        <h4>Marcus Rivera</h4>
+        <p>Comic Artist</p>
+        <div class="creator-stats">
+          <span>23 NFTs</span>
+          <span>4.1 ETH</span>
+        </div>
+      </div>
+      <div class="creator-card">
+        <img src="https://via.placeholder.com/120" alt="Creator" />
+        <h4>Emily Watson</h4>
+        <p>Poet</p>
+        <div class="creator-stats">
+          <span>8 NFTs</span>
+          <span>1.8 ETH</span>
+        </div>
+      </div>
+      <div class="creator-card">
+        <img src="https://via.placeholder.com/120" alt="Creator" />
+        <h4>David Kim</h4>
+        <p>Sci-Fi Writer</p>
+        <div class="creator-stats">
+          <span>12 NFTs</span>
+          <span>3.2 ETH</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured NFTs Section -->
+  <section class="section">
+    <h2>Featured Literary NFTs</h2>
+    <div class="nft-grid">
+      <div class="nft-card">
+        <img src="https://via.placeholder.com/300x180" alt="NFT Cover" />
+        <div class="nft-info">
+          <h3>The Digital Chronicles</h3>
+          <p class="nft-author">by Sarah Chen</p>
+          <p class="nft-description">A cyberpunk novel exploring AI consciousness and human identity.</p>
+          <div class="nft-price">
+            <span class="price">0.5 ETH</span>
+            <span class="price-usd">≈ $1,200</span>
+          </div>
+          <div class="nft-actions">
+            <button class="btn-buy">Buy Now</button>
+            <button class="btn-auction">Place Bid</button>
+          </div>
+        </div>
+      </div>
+      <div class="nft-card">
+        <img src="https://via.placeholder.com/300x180" alt="NFT Cover" />
+        <div class="nft-info">
+          <h3>Cosmic Poetry Collection</h3>
+          <p class="nft-author">by Emily Watson</p>
+          <p class="nft-description">A collection of poems inspired by space exploration and cosmic wonder.</p>
+          <div class="nft-price">
+            <span class="price">0.3 ETH</span>
+            <span class="price-usd">≈ $720</span>
+          </div>
+          <div class="nft-actions">
+            <button class="btn-buy">Buy Now</button>
+            <button class="btn-auction">Place Bid</button>
+          </div>
+        </div>
+      </div>
+      <div class="nft-card">
+        <img src="https://via.placeholder.com/300x180" alt="NFT Cover" />
+        <div class="nft-info">
+          <h3>Neo-Tokyo Adventures</h3>
+          <p class="nft-author">by Marcus Rivera</p>
+          <p class="nft-description">A graphic novel series set in a futuristic Tokyo with cyberpunk themes.</p>
+          <div class="nft-price">
+            <span class="price">0.8 ETH</span>
+            <span class="price-usd">≈ $1,920</span>
+          </div>
+          <div class="nft-actions">
+            <button class="btn-buy">Buy Now</button>
+            <button class="btn-auction">Place Bid</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="how-it-works">
+    <h2>How LiteraVerse Works</h2>
+    <div class="steps-container">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Create or Upload</h3>
+        <p>Write your story, create comics, or compose poems. Use our AI tools or upload your existing work.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Mint as NFT</h3>
+        <p>Convert your creative work into a unique NFT with blockchain ownership and smart contract licensing.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Sell & Earn</h3>
+        <p>List your NFTs for sale, auction, or trade. Earn royalties from every transaction automatically.</p>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
   <footer class="footer">
-    © 2025 Bookify. Made with ❤️ by Tanay.
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>LiteraVerse</h4>
+        <p>The Web3 marketplace for literary creativity</p>
+      </div>
+      <div class="footer-section">
+        <h4>Marketplace</h4>
+        <a href="#stories">Stories</a>
+        <a href="#comics">Comics</a>
+        <a href="#poems">Poems</a>
+      </div>
+      <div class="footer-section">
+        <h4>Community</h4>
+        <a href="#creators">Creators</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#events">Events</a>
+      </div>
+      <div class="footer-section">
+        <h4>Support</h4>
+        <a href="#help">Help Center</a>
+        <a href="#docs">Documentation</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 LiteraVerse. Made with ❤️ for creators worldwide.
+    </div>
   </footer>
 
   <script src="script.js"></script>
   <script>
     // Typing animation for hero section
-    const text = "Discover Stories, Discover Yourself";
+    const texts = [
+      "Write, Own, and Earn",
+      "Mint Stories as NFTs",
+      "Create with AI Power",
+      "Trade Literary Assets"
+    ];
     const typedText = document.getElementById("typed-text");
     const cursor = document.getElementById("cursor");
-    let i = 0;
+    let textIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
 
     function type() {
-      if (i < text.length) {
-        typedText.textContent += text.charAt(i);
-        i++;
-        setTimeout(type, 100);
+      const currentText = texts[textIndex];
+      
+      if (isDeleting) {
+        typedText.textContent = currentText.substring(0, charIndex - 1);
+        charIndex--;
       } else {
-        setTimeout(() => {
-          cursor.style.display = "none";
-        }, 500);
+        typedText.textContent = currentText.substring(0, charIndex + 1);
+        charIndex++;
       }
+
+      let typeSpeed = isDeleting ? 50 : 100;
+
+      if (!isDeleting && charIndex === currentText.length) {
+        typeSpeed = 2000;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        textIndex = (textIndex + 1) % texts.length;
+        typeSpeed = 500;
+      }
+
+      setTimeout(type, typeSpeed);
+    }
+
+    // Animate stats
+    function animateStats() {
+      const stats = [
+        { element: 'total-nfts', target: 1247 },
+        { element: 'total-creators', target: 156 },
+        { element: 'total-sales', target: 89 }
+      ];
+
+      stats.forEach(stat => {
+        const element = document.getElementById(stat.element);
+        let current = 0;
+        const increment = stat.target / 100;
+        
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= stat.target) {
+            current = stat.target;
+            clearInterval(timer);
+          }
+          element.textContent = Math.floor(current).toLocaleString();
+        }, 20);
+      });
     }
 
     document.addEventListener("DOMContentLoaded", () => {
       type();
+      setTimeout(animateStats, 1000);
     });
   </script>
 </body>
